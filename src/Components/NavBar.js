@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import TextForm from './TextForm'
 
 export default function NavBar({ headText = "HeadText Here", aboutText = "AboutText Here", changeStyle }) {
     return (
