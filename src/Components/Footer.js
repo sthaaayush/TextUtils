@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Footer = () => {
     const footerStyle = {
-        position: "fixed",
+        position: "relative",
         left: 0,
         bottom: 0,
         width: "100%",
