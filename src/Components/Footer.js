@@ -19,7 +19,7 @@ const Footer = () => {
                     <a href="https://facebook.com" className="text-white mx-2" target="_blank" rel="noopener noreferrer">
                         <i className="bi bi-facebook"></i>
                     </a>
-                    <a href="https://instagram.com" className="text-white mx-2" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com" className="text-white mx-2" target="_blank" rel="noopener noreferrer">
                         <i className="bi bi-github"></i>
                     </a>
                     <a href="https://linkedin.com" className="text-white mx-2" target="_blank" rel="noopener noreferrer">
