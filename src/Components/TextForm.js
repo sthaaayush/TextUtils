@@ -25,80 +25,171 @@ export default function TextForm({ heading }) {
         // console.log("Clear was clicked"); // For debugging
     }
 
-    // Style for Text Form
-    let textUtilsStyle = {
-        border: "1px solid black",
-        borderRadius: "20px",
-        background: "lightgray",
-        height: "40em",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between"
+    // Function to clear the text input
+    const copyText = () => {
+        navigator.clipboard.writeText(text);
+        // console.log("Copy was clicked"); // For debugging
     }
 
     // Style for Text Form
-    let textCounterStyle = {
+    const [textUtilsStyle, setTextUtilsStyle] = useState({
         border: "1px solid black",
         borderRadius: "20px",
-        background: "lightgray",
+        background: "#ffffff",
+        height: "40em",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly"
+    })
+
+    // Style for Text Form
+    const [textCounterStyle, setTextCounterStyle] = useState({
+        border: "1px solid black",
+        borderRadius: "20px",
+        background: "#ffffff",
         height: "fit-content",
         display: "flex",
         flexDirection: "column",
         justifyContent: "left",
         padding: "10px"
-    }
+    })
 
     // Style for Text Form
-    let textPreviewStyle = {
+    const [textPreviewStyle, setTextPreviewStyle] = useState({
         border: "1px solid black",
         borderRadius: "20px",
-        background: "lightgray",
+        background: "#ffffff",
         height: "28em",
         display: "flex",
         flexDirection: "column",
         padding: "10px"
+    })
+
+
+    //Dark and Light Mode handler
+    const changeStyle = (e) => {
+        if (textCounterStyle.background === "#ffffff") {
+            document.querySelector("body").style.backgroundColor = "gray";
+            setTextUtilsStyle({
+                border: "2px solid white",
+                borderRadius: "20px",
+                background: "#000000",
+                color: "#ffffff",
+                height: "40em",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-evenly"
+            })
+            setTextCounterStyle({
+                border: "2px solid white",
+                borderRadius: "20px",
+                background: "#000000",
+                color: "#ffffff",
+                height: "fit-content",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "left",
+                padding: "10px"
+            })
+            setTextPreviewStyle({
+                border: "2px solid white",
+                borderRadius: "20px",
+                background: "#000000",
+                color: "#ffffff",
+                height: "28em",
+                display: "flex",
+                flexDirection: "column",
+                padding: "10px"
+            })
+        } else {
+            document.querySelector("body").style.backgroundColor = "white";
+            setTextUtilsStyle({
+                border: "2px solid black",
+                borderRadius: "20px",
+                background: "#ffffff",
+                color: "#000000",
+                height: "40em",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-evenly"
+            })
+            setTextCounterStyle({
+                border: "2px solid black",
+                borderRadius: "20px",
+                background: "#ffffff",
+                color: "#000000",
+                height: "fit-content",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "left",
+                padding: "10px"
+            })
+            setTextPreviewStyle({
+                border: "2px solid black",
+                borderRadius: "20px",
+                background: "#ffffff",
+                color: "#000000",
+                height: "28em",
+                display: "flex",
+                flexDirection: "column",
+                padding: "10px"
+            })
+        }
     }
+
+
 
     let [text, setText] = useState("");
     return (
-        <div style={{ display: "flex", gap: "-2px" }}>
-            {/* Text Utils Form */}
-            <div className='container text-center w-50' style={textUtilsStyle}>
-                <h1>{heading}</h1>
-                <div className="mb-3">
-                    <textarea className="form-control" id="textForm" rows="16" value={text} onChange={handleOnChange} style={{ resize: 'none' }}></textarea>
-                </div>
-                <div className="mb-3">
-                    <button className='btn btn-primary mx-1 my-1' onClick={setUpText}>
-                        Uppercase
-                    </button>
-                    <button className='btn btn-secondary mx-1 my-1' onClick={setLowText}>
-                        Lowercase
-                    </button>
-                    <button className="btn btn-danger mx-1 my-1" onClick={clearText}>
-                        Clear
-                    </button>
-                </div>
+        <>
+            {/* Dark and White Toggler */}
+            <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" onChange={changeStyle} />
             </div>
 
-            {/* Text Counter */}
-            <div className="container w-50 " >
-                <div style={textCounterStyle}>
-                    <h1 className=''>Counter</h1>
-                    <b>Word: {text.split(" ").length}</b>
-                    <b>Sentence: {text.split(".").length - 1}</b>
-                    <b>Character: {text.length}</b>
-                    <b>Reading Time: {text.split(" ").length * 0.008}</b>
+            <div className="textform-wrapper">
+                {/* Text Utils Form */}
+                <div className='container text-center w-50' style={textUtilsStyle}>
+                    <h2>{heading}</h2>
+                    <div className="mb-3">
+                        <textarea className="form-control" id="textForm" rows="16" value={text} onChange={handleOnChange} style={{ resize: 'none', boxShadow: "black 1px 1px 3px 0px" }}></textarea>
+                    </div>
+                    <div className="mb-3">
+                        <button className='btn btn-outline-primary mx-1 my-1' onClick={setUpText}>
+                            Uppercase
+                        </button>
+                        <button className='btn btn-outline-secondary mx-1 my-1' onClick={setLowText}>
+                            Lowercase
+                        </button>
+                        <button className="btn btn-outline-danger mx-1 my-1" onClick={clearText}>
+                            Clear
+                        </button>
+                        <button className="btn btn-outline-info mx-1 my-1" onClick={copyText}>
+                            <i className="bi bi-clipboard-check"></i>
+                        </button>
+
+                    </div>
                 </div>
-                <div style={textPreviewStyle} className='my-3'>
-                    <h1 className='text-center'>Preview</h1>
-                    <p style={{
-                        overflow: "scroll",
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none'
-                    }}>{text}</p>
+
+                {/* Text Counter */}
+                <div className="container w-50 " >
+                    <div style={textCounterStyle}>
+                        <h2 className=''>Counter</h2>
+                        <b>Word: {text.split(" ").length}</b>
+                        <b>Sentence: {text.split(".").length - 1}</b>
+                        <b>Character: {text.length}</b>
+                        <b>Reading Time: {text.split(" ").length * 0.008}</b>
+                    </div>
+                    <div style={textPreviewStyle} className='my-3'>
+                        <h2 className='text-center'>Preview</h2>
+                        <p style={{
+                            overflow: "scroll",
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none'
+                        }}>{text}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
