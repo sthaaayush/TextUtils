@@ -20,11 +20,11 @@ export default function NavBar({ headText = "HeadText Here", aboutText = "AboutT
                     </ul>
                 </div>
                 {/* Dark and White Toggler */}
-                <div><i class="bi bi-brightness-high-fill"></i></div>
+                <div><i className="bi bi-brightness-high-fill"></i></div>
                 <div className="form-check form-switch" style={{ display: "flex", flexDirection: "row" }}>
                     <div><input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" onChange={changeStyle} /></div>
                 </div>
-                <div><i class="bi bi-moon-stars-fill"></i></div>
+                <div><i className="bi bi-moon-stars-fill"></i></div>
             </div>
         </nav>
     )

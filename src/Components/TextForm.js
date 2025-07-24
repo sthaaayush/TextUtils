@@ -31,6 +31,44 @@ export default function TextForm({ heading }) {
         // console.log("Copy was clicked"); // For debugging
     }
 
+    // Function to clear the text input
+    const clearSpace = () => {
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "));
+        // console.log("Clear Space was clicked"); // For debugging
+    }
+
+    // Function to capitalize first word of the text input
+    const capitalize = () => {
+        let newText = text.split(" ")
+            .map((txt) => {
+                return txt[0].toUpperCase() + txt.slice(1);
+            }).join(" ");
+        setText(newText);
+        // console.log(newText); // For debugging
+    }
+
+    // Function to inverse case the text input
+    const caseInverse = () => {
+        let newText = text.split(" ").map((txt) => {
+            let inverseCaseTxt = "";
+            for (let x in txt) {
+                if (/[A-Z]/.test(txt[x])) { //Checks for capital character
+                    inverseCaseTxt = inverseCaseTxt + txt[x].toLowerCase();
+                }
+                else if (/[a-z]/.test(txt[x])) {//Checks for small character
+                    inverseCaseTxt = inverseCaseTxt + txt[x].toUpperCase();
+                }
+                else {//Checks for non-character
+                    inverseCaseTxt = inverseCaseTxt + txt[x];
+                }
+            }
+            return inverseCaseTxt;
+        }).join(" ");
+        setText(newText)
+        // console.log(newText); // For debugging
+    }
+
     // Style for Text Form
     const [textUtilsStyle, setTextUtilsStyle] = useState({
         border: "1px solid black",
@@ -64,7 +102,6 @@ export default function TextForm({ heading }) {
         flexDirection: "column",
         padding: "10px"
     })
-
 
     //Dark and Light Mode handler
     const changeStyle = (e) => {
@@ -164,6 +201,15 @@ export default function TextForm({ heading }) {
                         <button className="btn btn-outline-danger mx-1 my-1" onClick={clearText}>
                             Clear
                         </button>
+                        <button className="btn btn-outline-primary mx-1 my-1" onClick={clearSpace}>
+                            Clear Space
+                        </button>
+                        <button className="btn btn-outline-primary mx-1 my-1" onClick={capitalize}>
+                            Capitalize
+                        </button>
+                        <button className="btn btn-outline-primary mx-1 my-1" onClick={caseInverse}>
+                            InVeRsE
+                        </button>
                         <button className="btn btn-outline-info mx-1 my-1" onClick={copyText}>
                             <i className="bi bi-clipboard-check"></i>
                         </button>
@@ -178,11 +224,12 @@ export default function TextForm({ heading }) {
                         <b>Word: {text.split(" ").length}</b>
                         <b>Sentence: {text.split(".").length - 1}</b>
                         <b>Character: {text.length}</b>
-                        <b>Reading Time: {text.split(" ").length * 0.008}</b>
+                        <b>Reading Time: {text.split(" ").length * 0.008} Min</b>
                     </div>
                     <div style={textPreviewStyle} className='my-3'>
                         <h2 className='text-center'>Preview</h2>
-                        <p style={{
+                        <i className="bi bi-clipboard-check-fill" style={{ cursor: "pointer", }} onClick={() => { navigator.clipboard.writeText(document.querySelector(".preview").textContent); }}></i>
+                        <p className="preview" style={{
                             overflow: "scroll",
                             scrollbarWidth: 'none',
                             msOverflowStyle: 'none'
