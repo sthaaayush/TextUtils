@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function TextForm({ heading, mode }) {
+export default function TextForm({ heading, mode, alerts }) {
     // Function to change text to uppercase
     const setUpText = () => {
         setText(text.toUpperCase());
@@ -22,14 +22,49 @@ export default function TextForm({ heading, mode }) {
     // Function to clear the text input
     const clearText = () => {
         setText("");
+        alerts("Text Cleared", "danger");
         // console.log("Clear was clicked"); // For debugging
     }
 
     // Function to clear the text input
+    // const copyText = () => {
+    //     navigator.clipboard.writeText(text);
+    //     alerts("Text Copied", "primary");
+    //     // console.log("Copy was clicked"); // For debugging
+    // }
     const copyText = () => {
-        navigator.clipboard.writeText(text);
-        // console.log("Copy was clicked"); // For debugging
-    }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text)
+                .then(() => alerts("Text Copied!", "primary"))
+                .catch((err) => {
+                    console.error("Copy failed:", err);
+                    alerts("Copy failed", "danger");
+                });
+        } else {
+            // Fallback: create a hidden textarea (for older mobile browsers)
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";  // Avoid scrolling to bottom
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand("copy");
+                if (successful) {
+                    alerts("Text Copied!", "primary");
+                } else {
+                    alerts("Copy not supported", "warning");
+                }
+            } catch (err) {
+                console.error("Fallback copy failed", err);
+                alerts("Copy failed", "danger");
+            }
+
+            document.body.removeChild(textArea);
+        }
+    };
 
     // Function to clear the text input
     const clearSpace = () => {
