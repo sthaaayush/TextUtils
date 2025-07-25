@@ -9,14 +9,17 @@ import { useState } from 'react';
 function App() {
 
   const [theme, setTheme] = useState("light");
+  const [icon, setIcon] = useState("brightness-high");
 
   const changeStyle = () => {
     if (theme === "light") {
       document.body.style.backgroundColor = "gray";
       setTheme("dark");
+      setIcon("moon-stars")
     } else {
       document.body.style.backgroundColor = "white";
       setTheme("light");
+      setIcon("brightness-high")
     }
   };
 
@@ -24,7 +27,7 @@ function App() {
     <Router>
       <>
         {/* NavBar */}
-        <NavBar headText="TextUtils" aboutText="About TextUtils" changeStyle={changeStyle} />
+        <NavBar headText="TextUtils" aboutText="About TextUtils" changeStyle={changeStyle} icon={icon}/>
         <Routes>
           {/* TextForm Component */}
           <Route exact path='/' element={

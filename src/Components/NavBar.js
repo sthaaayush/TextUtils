@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-export default function NavBar({ headText = "HeadText Here", aboutText = "AboutText Here", changeStyle }) {
+export default function NavBar({ headText = "HeadText Here", aboutText = "AboutText Here", changeStyle, icon }) {
     return (
         <nav className="navbar navbar-expand-lg bg-dark-subtle">
             <div className="container-fluid">
@@ -20,11 +20,7 @@ export default function NavBar({ headText = "HeadText Here", aboutText = "AboutT
                     </ul>
                 </div>
                 {/* Dark and White Toggler */}
-                <div><i className="bi bi-brightness-high-fill"></i></div>
-                <div className="form-check form-switch" style={{ display: "flex", flexDirection: "row" }}>
-                    <div><input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" onChange={changeStyle} /></div>
-                </div>
-                <div><i className="bi bi-moon-stars-fill"></i></div>
+                <div><i className={`bi bi-${icon}-fill fs-4 mx-3`} onClick={changeStyle} style={{ cursor: "pointer" }}></i></div>
             </div>
         </nav>
     )
