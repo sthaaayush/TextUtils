@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function About() {
+export default function About({mode}) {
     return (
         <div className="container my-5">
             <div className="card shadow-lg border-0" style={{borderRadius: "40px"}}>
-                <div className="card-body" style={{borderRadius: "40px"}}>
+                <div className={`card-body bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} style={{borderRadius: "40px"}}>
                     <h2 className="card-title text-center mb-4">About TextUtils</h2>
                     <p className="card-text">
                         <strong>TextUtils</strong> is a simple and efficient text manipulation tool built with React. It provides

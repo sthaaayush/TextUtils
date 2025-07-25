@@ -13,17 +13,9 @@ function App() {
   const changeStyle = () => {
     if (theme === "light") {
       document.body.style.backgroundColor = "gray";
-      if (document.querySelector(".card-body")) {
-        document.querySelector(".card-body").style.backgroundColor = "black";
-        document.querySelector(".card-body").style.color = "white";
-      }
       setTheme("dark");
     } else {
       document.body.style.backgroundColor = "white";
-      if (document.querySelector(".card-body")) {
-        document.querySelector(".card-body").style.backgroundColor = "white";
-        document.querySelector(".card-body").style.color = "black";
-      }
       setTheme("light");
     }
   };
@@ -37,13 +29,13 @@ function App() {
           {/* TextForm Component */}
           <Route exact path='/' element={
             <div className="container my-3">
-              <TextForm heading="Enter text to analyze" />
+              <TextForm heading="Enter text to analyze" mode={theme} />
             </div>
           }
           ></Route>
 
           {/* About Component */}
-          <Route exact path='/about' element={<About />}></Route>
+          <Route exact path='/about' element={<About  mode={theme}/>}></Route>
         </Routes>
 
         {/* Footer Component */}

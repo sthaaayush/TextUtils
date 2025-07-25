@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function TextForm({ heading }) {
+export default function TextForm({ heading, mode }) {
     // Function to change text to uppercase
     const setUpText = () => {
         setText(text.toUpperCase());
@@ -70,108 +70,34 @@ export default function TextForm({ heading }) {
     }
 
     // Style for Text Form
-    const [textUtilsStyle, setTextUtilsStyle] = useState({
-        border: "1px solid black",
+    const textUtilsStyle = {
+        // border: "1px solid black",
         borderRadius: "20px",
-        background: "#ffffff",
         height: "40em",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly"
-    })
+    }
 
     // Style for Text Form
-    const [textCounterStyle, setTextCounterStyle] = useState({
-        border: "1px solid black",
+    const textCounterStyle = {
+        // border: "1px solid black",
         borderRadius: "20px",
-        background: "#ffffff",
         height: "fit-content",
         display: "flex",
         flexDirection: "column",
         justifyContent: "left",
         padding: "10px"
-    })
+    }
 
     // Style for Text Form
-    const [textPreviewStyle, setTextPreviewStyle] = useState({
-        border: "1px solid black",
+    const textPreviewStyle = {
+        // border: "1px solid black",
         borderRadius: "20px",
-        background: "#ffffff",
         height: "28em",
         display: "flex",
         flexDirection: "column",
         padding: "10px"
-    })
-
-    //Dark and Light Mode handler
-    const changeStyle = (e) => {
-        if (textCounterStyle.background === "#ffffff") {
-            document.querySelector("body").style.backgroundColor = "gray";
-            setTextUtilsStyle({
-                border: "2px solid white",
-                borderRadius: "20px",
-                background: "#000000",
-                color: "#ffffff",
-                height: "40em",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly"
-            })
-            setTextCounterStyle({
-                border: "2px solid white",
-                borderRadius: "20px",
-                background: "#000000",
-                color: "#ffffff",
-                height: "fit-content",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "left",
-                padding: "10px"
-            })
-            setTextPreviewStyle({
-                border: "2px solid white",
-                borderRadius: "20px",
-                background: "#000000",
-                color: "#ffffff",
-                height: "28em",
-                display: "flex",
-                flexDirection: "column",
-                padding: "10px"
-            })
-        } else {
-            document.querySelector("body").style.backgroundColor = "white";
-            setTextUtilsStyle({
-                border: "2px solid black",
-                borderRadius: "20px",
-                background: "#ffffff",
-                color: "#000000",
-                height: "40em",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly"
-            })
-            setTextCounterStyle({
-                border: "2px solid black",
-                borderRadius: "20px",
-                background: "#ffffff",
-                color: "#000000",
-                height: "fit-content",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "left",
-                padding: "10px"
-            })
-            setTextPreviewStyle({
-                border: "2px solid black",
-                borderRadius: "20px",
-                background: "#ffffff",
-                color: "#000000",
-                height: "28em",
-                display: "flex",
-                flexDirection: "column",
-                padding: "10px"
-            })
-        }
     }
 
 
@@ -179,17 +105,12 @@ export default function TextForm({ heading }) {
     let [text, setText] = useState("");
     return (
         <>
-            {/* Dark and White Toggler */}
-            <div className="form-check form-switch">
-                <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" onChange={changeStyle} />
-            </div>
-
             <div className="textform-wrapper">
                 {/* Text Utils Form */}
-                <div className='container text-center w-50' style={textUtilsStyle}>
+                <div className={`container text-center w-50 bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} style={textUtilsStyle}>
                     <h2>{heading}</h2>
                     <div className="mb-3">
-                        <textarea className="form-control" id="textForm" rows="16" value={text} onChange={handleOnChange} style={{ resize: 'none', boxShadow: "black 1px 1px 3px 0px" }}></textarea>
+                        <textarea className={`form-control bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} id="textForm" rows="16" value={text} onChange={handleOnChange} style={{ resize: 'none', boxShadow: "black 1px 1px 3px 0px" }}></textarea>
                     </div>
                     <div className="mb-3">
                         <button className='btn btn-outline-primary mx-1 my-1' onClick={setUpText}>
@@ -219,14 +140,14 @@ export default function TextForm({ heading }) {
 
                 {/* Text Counter */}
                 <div className="container w-50 " >
-                    <div style={textCounterStyle}>
+                    <div className={`container bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} style={textCounterStyle}>
                         <h2 className=''>Counter</h2>
                         <b>Word: {text.split(" ").length}</b>
                         <b>Sentence: {text.split(".").length - 1}</b>
                         <b>Character: {text.length}</b>
                         <b>Reading Time: {text.split(" ").length * 0.008} Min</b>
                     </div>
-                    <div style={textPreviewStyle} className='my-3'>
+                    <div style={textPreviewStyle} className={`container bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} my-3 border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} >
                         <h2 className='text-center'>Preview</h2>
                         <i className="bi bi-clipboard-check-fill" style={{ cursor: "pointer", }} onClick={() => { navigator.clipboard.writeText(document.querySelector(".preview").textContent); }}></i>
                         <p className="preview" style={{
