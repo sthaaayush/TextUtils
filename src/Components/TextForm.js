@@ -104,6 +104,43 @@ export default function TextForm({ heading, mode, alerts }) {
         // console.log(newText); // For debugging
     }
 
+    //Word Counter
+    const wordCounter = () => {
+        let wordLength = 0;
+        let arr = text.split(" ");
+        for (let x in arr) {
+            if (arr[x] !== '' && arr.length !== 1) {
+                wordLength = wordLength + 1;
+            }
+        }
+        return wordLength;
+    }
+
+    //Character Counter
+    const charCounter = () => {
+        let charLength = 0;
+        let arr = text.split(" ");
+        for (let x in arr) {
+            if (arr[x] !== '') {
+                charLength = charLength + arr[x].length;
+            }
+        }
+        return charLength;
+    }
+
+    //Sentence Counter
+    const sentenceCounter = () => {
+        let sentenceLength = 0;
+        let arr = text.split(".");
+        for (let x in arr) {
+            if (arr[x].trim() !== '' && arr.length !== 1) {
+                sentenceLength = sentenceLength + 1;
+            }
+        }
+        console.log(arr);
+        return sentenceLength;
+    }
+
     // Style for Text Form
     const textUtilsStyle = {
         // border: "1px solid black",
@@ -177,10 +214,10 @@ export default function TextForm({ heading, mode, alerts }) {
                 <div className="container w-50 " >
                     <div className={`container bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} style={textCounterStyle}>
                         <h2 className=''>Counter</h2>
-                        <b>Word: {text.split(" ").length}</b>
-                        <b>Sentence: {text.split(".").length - 1}</b>
-                        <b>Character: {text.length}</b>
-                        <b>Reading Time: {text.split(" ").length * 0.008} Min</b>
+                        <b>Word: {wordCounter()}</b>
+                        <b>Sentence: {sentenceCounter()}</b>
+                        <b>Character: {charCounter()}</b>
+                        <b>Reading Time: {(wordCounter() * 0.008).toFixed(3)} Min</b>
                     </div>
                     <div style={textPreviewStyle} className={`container bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} my-3 border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} >
                         <h2 className='text-center'>Preview</h2>
