@@ -4,12 +4,14 @@ export default function TextForm({ heading, mode, alerts }) {
     // Function to change text to uppercase
     const setUpText = () => {
         setText(text.toUpperCase());
+        alerts("Text UpperCase", "success");
         // console.log("Uppercase was clicked"); // For debugging
     }
 
     // Function to change text to Lowercase
     const setLowText = () => {
         setText(text.toLowerCase());
+        alerts("Text LowerCase", "success");
         // console.log("Lowercase was clicked"); // For debugging
     }
 
@@ -26,7 +28,7 @@ export default function TextForm({ heading, mode, alerts }) {
         // console.log("Clear was clicked"); // For debugging
     }
 
-    // Function to clear the text input
+    // Function to copy the text input
     // const copyText = () => {
     //     navigator.clipboard.writeText(text);
     //     alerts("Text Copied", "primary");
@@ -70,6 +72,7 @@ export default function TextForm({ heading, mode, alerts }) {
     const clearSpace = () => {
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
+        alerts("Space Cleared", "success");
         // console.log("Clear Space was clicked"); // For debugging
     }
 
@@ -80,6 +83,7 @@ export default function TextForm({ heading, mode, alerts }) {
                 return txt[0].toUpperCase() + txt.slice(1);
             }).join(" ");
         setText(newText);
+        alerts("Text Capitalize", "success");
         // console.log(newText); // For debugging
     }
 
@@ -101,6 +105,7 @@ export default function TextForm({ heading, mode, alerts }) {
             return inverseCaseTxt;
         }).join(" ");
         setText(newText)
+        alerts("Case Inverted", "success");
         // console.log(newText); // For debugging
     }
 
@@ -137,7 +142,6 @@ export default function TextForm({ heading, mode, alerts }) {
                 sentenceLength = sentenceLength + 1;
             }
         }
-        console.log(arr);
         return sentenceLength;
     }
 
