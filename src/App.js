@@ -46,7 +46,7 @@ function App() {
     <Router>
       <>
         {/* NavBar */}
-        <NavBar headText="TextUtils" aboutText="About TextUtils" changeStyle={changeStyle} icon={icon} />
+        <NavBar headText="TextUtils" aboutText="About TextUtils" changeStyle={changeStyle} icon={icon} mode={theme}/>
         <Alert alerts={alerts} />
         <Routes>
           {/* TextForm Component */}

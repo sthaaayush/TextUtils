@@ -112,7 +112,7 @@ export default function TextForm({ heading, mode, alerts }) {
     //Word Counter
     const wordCounter = () => {
         let wordLength = 0;
-        let arr = text.split(" ");
+        let arr = text.split(/\s+/);
         for (let x in arr) {
             if (arr[x] !== '' && arr.length !== 1) {
                 wordLength = wordLength + 1;
@@ -220,7 +220,11 @@ export default function TextForm({ heading, mode, alerts }) {
                         <h2 className=''>Counter</h2>
                         <b>Word: {wordCounter()}</b>
                         <b>Sentence: {sentenceCounter()}</b>
-                        <b>Character: {charCounter()}</b>
+                        <p>
+                            <b>Character:</b> <br />
+                            <b>-Without Space: {charCounter()}</b> <br />
+                            <b>-With Space: {text.length}</b> 
+                        </p>
                         <b>Reading Time: {(wordCounter() * 0.008).toFixed(3)} Min</b>
                     </div>
                     <div style={textPreviewStyle} className={`container bg-${mode} text-${mode === 'light' ? 'dark' : 'light'} my-3 border border-2 border-${mode === 'light' ? 'dark' : 'light'}`} >
